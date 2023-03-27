@@ -29,14 +29,14 @@ int rpn::CalculationResult(int n1, int n2, char o)
 		case '+':
 			return (n1 + n2);
 		case '-':
-			return (n1 - n2);
+			return (n2 - n1);
 		case '*':
 			return (n1 * n2);
 		case '/':
 		{
 			if (n2 == 0)
 				throw std::invalid_argument("Floating Point Exception Dividing on Zero\n");
-			return (n1 / n2);
+			return (n2 / n1);
 		}
 	}
 	return (0);
@@ -45,63 +45,30 @@ int rpn::CalculationResult(int n1, int n2, char o)
 
 void    rpn::ReadInput(std::string input)
 {
-	int dig = 0;
-	int op = 0;
-
-	for (int i = input.length() - 1; i >= 0; i--)
+	std::string ope = "+/*-";
+	size_t op, num;
+	op = num = 0;
+	for (size_t i = 0; i < input.length() ; i++)
 	{
 		if (isdigit(input[i]))
 		{
+			num++;
 			this->_numbers.push(input[i] - '0');
-			dig++;
 		}
-		else if (input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/')
+		else if (ope.find(input[i]) != std::string::npos)
 		{
-			this->_operators.push(input[i]);
 			op++;
+			int n1 = _numbers.top();
+			_numbers.pop();
+			_numbers.top() = CalculationResult(n1, _numbers.top(), input[i]);
 		}
+
 		else if (isspace(input[i]))
 			continue;
 		else
 			throw std::invalid_argument("Invalid Input\n");
 	}
-	if (op + 1 != dig)
+	if ((op + 1) != num)
 		throw std::invalid_argument("Number of operators less or greater than numbers\n");
-	this->Calculation();
+	std::cout << _numbers.top() << "\n";
 }
-
-void    rpn::Calculation()
-{
-	while (!(this->_operators.empty()))
-	{
-		if (this->_numbers.size() == 1)
-			break;
-		int n1 = this->_numbers.top();
-		_numbers.pop();
-		_numbers.top() = CalculationResult(n1, _numbers.top(), _operators.top());
-		_operators.pop();
-	}
-	std::cout << "-> " << _numbers.top() << "\n";
-}
-
-void    rpn::PrintStack(char c)
-{
-	if (c == 'n')
-	{
-		while (!this->_numbers.empty())
-		{
-			std::cout << _numbers.top() << "\n";
-			_numbers.pop();
-		}
-	}
-	else if (c == 'o')
-	{
-		while (!this->_operators.empty())
-		{
-			std::cout << _operators.top() << "\n";
-			_operators.pop();
-		}
-	}
-}
-
-

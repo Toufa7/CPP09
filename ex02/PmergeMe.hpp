@@ -1,6 +1,15 @@
-#ifndef __PMERGEME_H__
-#define __PMERGEME_H__
+#ifndef PMERGEME_H
+#define PMERGEME_H
+
 #include <iostream>
+#include <vector>
+#include <deque>
+#include <list>
+#include <algorithm>
+#include <sys/time.h>
+#include <unistd.h> 
+
+
 
 class PmergeMe
 {

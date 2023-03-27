@@ -1,8 +1,8 @@
-NAME = rpn
+NAME = RPN
 
 CPP	= c++
 
-CPP_FLAGS = -std=c++98
+CPP_FLAGS = -Wall -Wextra -Werror -std=c++98
 
 FILES = main.cpp \
 		rpn.cpp \

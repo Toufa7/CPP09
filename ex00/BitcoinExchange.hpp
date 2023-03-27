@@ -9,7 +9,7 @@
 class BitcoinExchange
 {
     private:
-        std::map<std::string , double> _database;
+        std::map<std::string , float> _database;
     public:
         BitcoinExchange ();
         BitcoinExchange (const BitcoinExchange &a);
@@ -17,10 +17,10 @@ class BitcoinExchange
         BitcoinExchange & operator = (const BitcoinExchange &a);
 
         void    ReadBase(void);
-        void    PrintMap(std::map<std::string, double> mymap);
-        void    ReadInput(void);
-        void    ParseInput(int year, int month, int day, double rate);
-        void    PrintOuput(std::string inputdate, double bitcoins);
+        void    PrintMap(std::map<std::string, float> mymap);
+        void    ReadInput(std::string file);
+        int     Parsing(int year, int month, int day, std::string raate, float rate, std::string     line);
+        void    PrintOuput(std::string inputdate, float bitcoins);
 };
 
 #endif
