@@ -18,6 +18,7 @@
 
 # Ex02 : Ford Johnson Sort :
 
+### Disclaimer: The following is a brief explanation and does not reflect the actual implementation (Check Resources Below)
 
 <p align="center">
 
@@ -70,7 +71,7 @@ Now start to insert the elements of largest to smallest by using lower_bound to 
 
 
 
-
+# Addons
 
 let's start by defining what's a container ??
 
